@@ -1,0 +1,1 @@
+This pipeline is intended to be a demonstration of integrating Kafka messaging with a Nextflow pipeline, in this case RNAseq. 

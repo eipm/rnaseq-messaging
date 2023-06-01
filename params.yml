@@ -1,0 +1,7 @@
+# required parameters
+samplesheet: '/path/to/samplesheet'
+outputdir: '/path/to/output'
+
+star_index: '/path/to/star/index'
+ctat_lib: '/path/to/ctat_lib'
+salmon_index: '/path/to/salmon_index'
