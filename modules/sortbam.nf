@@ -1,7 +1,12 @@
 #!/usr/bin/env nextflow
 
 process SORT_BAM {
-    
+
+    tag "${meta.id}"
+
+    beforeScript ProcessMessage.started('SORT_BAM').forTopic('processevents').buildCommand()
+    afterScript ProcessMessage.completed('SORT_BAM').forTopic('processevents').buildCommand()
+
     input:
     tuple val(meta), path(bam)
     
@@ -14,6 +19,11 @@ process SORT_BAM {
     """
     touch ${meta.id}.star.sorted.bam
     touch ${meta.id}.star.sorted.bam.bai
+
+    MD5SUM=\$(md5sum ${meta.id}.star.sorted.bam | cut -d " " -f 1)
+    FILEPATH="${params.outputdir}/phase1/${meta.id}/${meta.id}.star.sorted.bam"
+
+    BashMessage 'taskevents' '"sample_barcode":"${meta.id}","filepath":"\${FILEPATH}","checksum":"\${MD5SUM}"'
     """
 
 }
