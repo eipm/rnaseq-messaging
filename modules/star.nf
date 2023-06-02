@@ -1,7 +1,13 @@
 #!/usr/bin/env nextflow
+import edu.cornell.eipm.messaging.zeromess.messages.*
 
 process STAR {
-    
+
+    tag "${meta.id}"
+
+    beforeScript ProcessMessage.started('STAR').forTopic('processevents').buildCommand()
+    afterScript ProcessMessage.completed('STAR').forTopic('processevents').buildCommand()
+
     input:
     tuple val(meta), path(left_fastq), path(right_fastq)
     path(star_index)
