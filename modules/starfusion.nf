@@ -1,4 +1,5 @@
 #!/usr/bin/env nextflow
+import edu.cornell.eipm.messaging.zeromess.messages.*
 
 process STAR_FUSION {
 
