@@ -24,7 +24,11 @@ process SALMON {
     MD5SUM=\$(md5sum ${meta.id}.quant.sf | cut -d " " -f 1)
     FILEPATH="${params.outputdir}/phase2/${meta.id}/salmon/${meta.id}.quant.sf"
 
-    BashMessage 'taskevents' '"sample_barcode":"${meta.id}","filepath":"\${FILEPATH}","checksum":"\${MD5SUM}"'
+    BashMessage 'taskevents' \$(cat << ARGS
+        "sample_barcode": "${meta.id}",
+        "filepath": "\${FILEPATH}",
+        "checksum": "\${MD5SUM}"
+    ARGS)
     """
 
 }

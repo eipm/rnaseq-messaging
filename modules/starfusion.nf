@@ -24,7 +24,11 @@ process STAR_FUSION {
     MD5SUM=\$(md5sum ${meta.id}.fusion_predictions.tsv | cut -d " " -f 1)
     FILEPATH="${params.outputdir}/phase2/${meta.id}/starfusion/${meta.id}.fusion_predictions.tsv"
 
-    BashMessage 'taskevents' '"sample_barcode":"${meta.id}","filepath":"\${FILEPATH}","checksum":"\${MD5SUM}"'
+    BashMessage 'taskevents' \$(cat << ARGS
+        "sample_barcode": "${meta.id}",
+        "filepath": "\${FILEPATH}",
+        "checksum": "\${MD5SUM}"
+    ARGS)
     """
 
 }

@@ -24,7 +24,11 @@ process SORT_BAM {
     MD5SUM=\$(md5sum ${meta.id}.star.sorted.bam | cut -d " " -f 1)
     FILEPATH="${params.outputdir}/phase1/${meta.id}/${meta.id}.star.sorted.bam"
 
-    BashMessage 'taskevents' '"sample_barcode":"${meta.id}","filepath":"\${FILEPATH}","checksum":"\${MD5SUM}"'
+    BashMessage 'taskevents' \$(cat << ARGS
+        "sample_barcode": "${meta.id}",
+        "filepath": "\${FILEPATH}",
+        "checksum": "\${MD5SUM}"
+    ARGS)
     """
 
 }
