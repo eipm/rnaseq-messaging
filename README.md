@@ -1,8 +1,8 @@
 rnaseq-messaging
 ===
-This pipeline is a basic demonstration of integrating Kafka messaging with Nextflow, in this case a RNAseq pipeline. Note that it can only be run as a `-stub`. In order to use messaging with this pipeline, a KafkaDispatcher reachable from the execution environment is required. This repo is meant to provide a simple example of what _can_ be done with the DispatcherSuite messaging framework.
+This pipeline is a basic demonstration of integrating Kafka messaging with Nextflow, in this case a RNAseq pipeline. Note that it can only be run as a `-stub`. In order to use messaging with this pipeline, a KafkaDispatcher instance reachable from the execution environment is required. This repo is meant to provide a simple example of what _can_ be done with the DispatcherSuite messaging framework.
 
-For a pipeline that explains the types of messages you can send, refer to [eipm/hello-mess-nf](https://github.com/eipm/hello-mess-nf/). 
+For a pipeline that explains the different types of messages you can send, refer to [eipm/hello-mess-nf](https://github.com/eipm/hello-mess-nf/). 
 
 ## Description
 The simulated workflow begins by aligning with `STAR`. The resulting genomic BAM is passed into `SORT_BAM`. This is followed by quantification with `SALMON` and fusion detection with `STAR_FUSION`. Results from `SORT_BAM`, `SALMON`, and `STAR_FUSION` are published. 
@@ -13,7 +13,7 @@ Messages containing metadata regarding file output (final published addresses, M
 ### Parameters
 The following parameters are specific to the messaging service:
 * `pipeline_messaging_enabled`: boolean value indicating whether messaging is enabled. **This parameter is required.**
-* `dispatcherURL`: the URL and port at which the KafkaDispatcher can be reached. This parameter is only required if messaging is enabled. 
+* `dispatcherURL`: the URL and port at which the KafkaDispatcher instance can be reached. This parameter is only required if messaging is enabled. 
 
 **The following parameters are required for execution regardless of whether or not messaging is enabled.** Note that all paths must point to existing files; as this is merely a stub the contents do not matter, but the paths must exist. 
 * `samplesheet`: a path to a samplesheet in the following format. All fastq paths must point to existing files. (This pipeline cannot handle samples with multiple fastqs e.g. sequenced in multiple lanes, nor is it designed for single end sequencing.)
